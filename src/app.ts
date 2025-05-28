@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import mongoose from 'mongoose';
 import authRoutes from './routes/auth.routes'
 import propertiRoutes from "./routes/property.routes"
+import favRoutes from './routes/favorite.routes'
 
 dotenv.config()
 const app = express();
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use("/auth",authRoutes)
 app.use("/properties",propertiRoutes)
+app.use("/:user_id/fav",favRoutes)
 
 const startServer = async()=>{
     try{
