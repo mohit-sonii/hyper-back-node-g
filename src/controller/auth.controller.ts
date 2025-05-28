@@ -30,8 +30,8 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         res.status(201).json({ status: 201, message: "User Created Successfully" })
         return
     } catch (error) {
-        res.status(500).json({ status: 500, message: "Internal Server Error" })
         console.log(error)
+        res.status(500).json({ status: 500, message: "Internal Server Error" })
         return
     }
 }

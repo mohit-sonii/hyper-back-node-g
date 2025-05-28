@@ -2,7 +2,7 @@
 import mongoose, { Schema } from 'mongoose'
 
 const UserSchema = new Schema({
-    username: {
+    email: {
         type: String,
         required: true
     },
@@ -24,7 +24,19 @@ const UserSchema = new Schema({
             ref: 'Properti'
         }],
         default: []
-    }
+    },
+    recommendationsReceived :[
+        {
+            from:{
+                type:Schema.Types.ObjectId,
+                ref:'User'
+            },
+            property:{
+                type:Schema.Types.ObjectId,
+                ref:'Properti'
+            }
+        }
+    ]
 })
 
 export const User = mongoose.model('User', UserSchema);
