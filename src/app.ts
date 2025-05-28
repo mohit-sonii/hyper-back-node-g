@@ -2,6 +2,8 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose';
+import authRoutes from './routes/auth.routes'
+import propertiRoutes from "./routes/property.routes"
 
 dotenv.config()
 const app = express();
@@ -9,6 +11,10 @@ app.use(express.json());
 app.use(cookieParser())
 
 const PORT = process.env.PORT || 5000;
+
+
+app.use("/auth",authRoutes)
+app.use("/properties",propertiRoutes)
 
 const startServer = async()=>{
     try{
