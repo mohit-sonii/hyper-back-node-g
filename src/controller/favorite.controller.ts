@@ -32,8 +32,8 @@ export const addFav = async (req: Request, res: Response): Promise<void> => {
 
 export const getFav = async (req: Request, res: Response): Promise<void> => {
     try {
-        const {user_Id} = req.params
-        const user = await User.findById(user_Id)
+        const {user_id} = req.params
+        const user = await User.findById(user_id)
         if(user==null){
             res.status(404).json({status:404,message:"User not found !!"})
             return

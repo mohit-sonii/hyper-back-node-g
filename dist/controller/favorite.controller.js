@@ -42,8 +42,8 @@ const addFav = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.addFav = addFav;
 const getFav = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { user_Id } = req.params;
-        const user = yield User_model_1.User.findById(user_Id);
+        const { user_id } = req.params;
+        const user = yield User_model_1.User.findById(user_id);
         if (user == null) {
             res.status(404).json({ status: 404, message: "User not found !!" });
             return;
