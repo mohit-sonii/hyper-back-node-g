@@ -15,7 +15,7 @@ const tokenCookieRedis_util_1 = require("../util/tokenCookieRedis.util");
 const Property_model_1 = require("../model/Property.model");
 const findUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { email } = req.query;
+        const { email } = req.body;
         const user = yield User_model_1.User.findOne({ email });
         if (user == null) {
             res.status(404).json({ status: 404, message: "User not found" });

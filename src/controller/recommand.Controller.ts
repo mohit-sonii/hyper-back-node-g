@@ -6,7 +6,7 @@ import { Properti } from '../model/Property.model';
 
 export const findUser = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { email } = req.query;
+        const { email } = req.body;
         const user = await User.findOne({ email })
         if (user == null) {
             res.status(404).json({ status: 404, message: "User not found" })
