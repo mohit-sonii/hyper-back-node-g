@@ -5,7 +5,7 @@ import { addProperty, deleteProperty, getProperty, searchProperty, updatePropert
 const router = Router()
 
 router.route('/add').post(authMiddleware,addProperty)
-router.route("/:prop_id").get(getProperty) // it is not mentioned that who has acrss to this route
+router.route("/:prop_id").get(authMiddleware,getProperty) 
 router.route("/update/:prop_id").patch(authMiddleware,updateProperty)
 router.route("/delete/:prop_id").delete(authMiddleware,deleteProperty)
 router.route("/").get(authMiddleware,searchProperty)
