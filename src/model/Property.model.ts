@@ -49,7 +49,8 @@ const propertySchema = new Schema({
     },
     availableFrom: {
         type: Date,
-        required: true
+        required: true,
+        default:new Date()
     },
     listedBy: {
         type: String,
