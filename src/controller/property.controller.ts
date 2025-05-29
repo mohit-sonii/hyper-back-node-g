@@ -8,7 +8,7 @@ export const addProperty = async (req: Request, res: Response): Promise<void> =>
     const { ...rest } = req.body;
     for (const i in rest) {
         const value = rest[i]
-        if (typeof value === 'string' && value.trim().length === 0) {
+        if (!Array.isArray(value) && typeof value === 'string' && value.trim().length === 0) {
             res.status(400).json({ satus: 400, message: "Some required fields are missing !!" })
             return
         }
