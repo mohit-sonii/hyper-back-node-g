@@ -14,8 +14,8 @@ const User_model_1 = require("../model/User.model");
 const Property_model_1 = require("../model/Property.model");
 const addFav = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId, prop_id } = req.params;
-        const user = yield User_model_1.User.findById(userId);
+        const { user_id, prop_id } = req.params;
+        const user = yield User_model_1.User.findById(user_id);
         if (user == null) {
             res.status(404).json({ status: 404, message: "User not found !!" });
             return;
@@ -25,7 +25,7 @@ const addFav = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             res.status(404).json({ status: 404, message: "Property with this ID is not found" });
             return;
         }
-        yield User_model_1.User.findByIdAndUpdate(userId, {
+        yield User_model_1.User.findByIdAndUpdate(user_id, {
             $push: {
                 properties: prop_id
             }
@@ -66,8 +66,8 @@ const getFav = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.getFav = getFav;
 const removeFav = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { userId, prop_id } = req.params;
-        const user = yield User_model_1.User.findById(userId);
+        const { user_id, prop_id } = req.params;
+        const user = yield User_model_1.User.findById(user_id);
         const property = yield Property_model_1.Properti.findById(prop_id);
         if (user == null || property == null) {
             res.status(404).json({
@@ -75,7 +75,7 @@ const removeFav = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 message: "Requested data not found"
             });
         }
-        yield User_model_1.User.findByIdAndUpdate(userId, {
+        yield User_model_1.User.findByIdAndUpdate(user_id, {
             $pull: {
                 favorites: prop_id
             }

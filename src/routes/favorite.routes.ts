@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { addFav, getFav, removeFav } from "../controller/favorite.controller";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const router = Router({mergeParams:true})
 
@@ -7,6 +8,6 @@ const router = Router({mergeParams:true})
 
 router.route("/").get(getFav)
 router.route("/add/:prop_id").get(addFav)
-router.route("/remove/:prop_id").delete(removeFav)
+router.route("/remove/:prop_id").delete(authMiddleware,removeFav)
 
 export default router;
