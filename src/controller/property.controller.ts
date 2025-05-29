@@ -35,7 +35,7 @@ export const addProperty = async (req: Request, res: Response): Promise<void> =>
                 bathrooms: rest.bathrooms,
                 amenities: rest.amenities ? rest.amenities:[],
                 furnished: rest.furnished,
-                availableFrom: rest.availableFrom? new Date(rest.availableFrom): new Date(),
+                // availableFrom: rest.availableFrom? new Date(rest.availableFrom): new Date(),
                 listedBy: rest.listedBy,
                 tags: rest.tags ? rest.tags:[],
                 colorTheme: rest.colorTheme,
@@ -211,7 +211,7 @@ export const searchProperty = async (req: Request, res: Response): Promise<void>
             bedrooms,
             bathrooms,
             furnished,
-            availableFrom,
+            // availableFrom,
             listedBy,
             colorTheme,
             amenities,
@@ -223,7 +223,7 @@ export const searchProperty = async (req: Request, res: Response): Promise<void>
         let query: any = {};
         if (id) query.id = id
         if (listedBy) query.listedBy = listedBy
-        if (availableFrom) query.availableFrom = new Date(availableFrom);
+        // if (availableFrom) query.availableFrom = new Date(availableFrom);
         if (title) query.title = title
         if (isVerified) query.isVerified = isVerified === "true"
         if (colorTheme) query.colorTheme = colorTheme

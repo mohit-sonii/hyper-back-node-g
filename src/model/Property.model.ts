@@ -47,11 +47,11 @@ const propertySchema = new Schema({
         type: String,
         required: true
     },
-    availableFrom: {
-        type: Date,
-        required: true,
-        default:new Date()
-    },
+    // availableFrom: {
+    //     type: Date,
+    //     required: true,
+    //     default:new Date()
+    // },
     listedBy: {
         type: String,
         required: true
