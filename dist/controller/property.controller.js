@@ -30,7 +30,7 @@ const addProperty = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const rest = __rest(req.body, []);
     for (const i in rest) {
         const value = rest[i];
-        if (typeof value === 'string' && value.trim().length === 0) {
+        if (!Array.isArray(value) && typeof value !== 'number' && typeof value === 'string' && value.trim().length === 0) {
             res.status(400).json({ satus: 400, message: "Some required fields are missing !!" });
             return;
         }
@@ -47,19 +47,19 @@ const addProperty = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         try {
             const newProperty = yield Property_model_1.Properti.create({
                 id: propertyId,
-                title: rest.id,
+                title: rest.title,
                 type: rest.type,
                 price: rest.price,
                 state: rest.state,
                 city: rest.city,
                 areaSqFt: rest.areaSqFt,
-                bedrooms: parseInt(rest.bedrooms),
-                bathrooms: parseInt(rest.bathrooms),
-                amenities: rest.amenities,
+                bedrooms: rest.bedrooms,
+                bathrooms: rest.bathrooms,
+                amenities: rest.amenities ? rest.amenities : [],
                 furnished: rest.furnished,
-                availableFrom: new Date(rest.availableFrom),
+                // availableFrom: rest.availableFrom? new Date(rest.availableFrom): new Date(),
                 listedBy: rest.listedBy,
-                tags: rest.tags,
+                tags: rest.tags ? rest.tags : [],
                 colorTheme: rest.colorTheme,
                 rating: rest.rating,
                 isVerified: rest.isVerified,
@@ -201,14 +201,15 @@ const getProperty = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.getProperty = getProperty;
 const searchProperty = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id, title, propertyType, price, state, city, areaSqFt, bedrooms, bathrooms, furnished, availableFrom, listedBy, colorTheme, amenities, tags, isVerified, listingType } = req.params;
+        const { id, title, propertyType, price, state, city, areaSqFt, bedrooms, bathrooms, furnished, 
+        // availableFrom,
+        listedBy, colorTheme, amenities, tags, isVerified, listingType } = req.params;
         let query = {};
         if (id)
             query.id = id;
         if (listedBy)
             query.listedBy = listedBy;
-        if (availableFrom)
-            query.availableFrom = new Date(availableFrom);
+        // if (availableFrom) query.availableFrom = new Date(availableFrom);
         if (title)
             query.title = title;
         if (isVerified)

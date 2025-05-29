@@ -80,10 +80,11 @@ const propertySchema = new mongoose_1.Schema({
         type: String,
         required: true
     },
-    availableFrom: {
-        type: Date,
-        required: true
-    },
+    // availableFrom: {
+    //     type: Date,
+    //     required: true,
+    //     default:new Date()
+    // },
     listedBy: {
         type: String,
         required: true

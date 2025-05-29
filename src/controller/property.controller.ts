@@ -25,7 +25,7 @@ export const addProperty = async (req: Request, res: Response): Promise<void> =>
         try {
             const newProperty = await Properti.create({
                 id: propertyId,
-                title: rest.id,
+                title: rest.title,
                 type: rest.type,
                 price: rest.price,
                 state: rest.state,
