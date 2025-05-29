@@ -120,7 +120,6 @@ export const updateProperty = async (req: Request, res: Response): Promise<void>
     }
 }
 
-
 export const deleteProperty = async (req: Request, res: Response): Promise<void> => {
 
     try {
@@ -162,9 +161,9 @@ export const deleteProperty = async (req: Request, res: Response): Promise<void>
             return
         }
 
-        await User.findByIdAndUpdate(userId,{
-            $pull:{
-                properties:prop_id
+        await User.findByIdAndUpdate(userId, {
+            $pull: {
+                properties: prop_id
             }
         })
         res.status(200).json({
@@ -183,13 +182,13 @@ export const deleteProperty = async (req: Request, res: Response): Promise<void>
 export const getProperty = async (req: Request, res: Response): Promise<void> => {
 
     try {
-        const {prop_id}=req.params
+        const { prop_id } = req.params
         const property = await Properti.findById(prop_id)
-        if(!property){
-            res.status(404).json({status:404,message:"No Such property found with this Id"})
+        if (!property) {
+            res.status(404).json({ status: 404, message: "No Such property found with this Id" })
             return
         }
-        res.status(200).json({status:200,message:"Property Found",property})
+        res.status(200).json({ status: 200, message: "Property Found", property })
         return
 
     } catch (err) {
@@ -199,3 +198,72 @@ export const getProperty = async (req: Request, res: Response): Promise<void> =>
     }
 }
 
+export const searchProperty = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const {
+            id,
+            title,
+            propertyType,
+            price,
+            state,
+            city,
+            areaSqFt,
+            bedrooms,
+            bathrooms,
+            furnished,
+            availableFrom,
+            listedBy,
+            colorTheme,
+            amenities,
+            tags,
+            isVerified,
+            listingType
+        } = req.params
+
+        let query: any = {};
+        if (id) query.id = id
+        if (listedBy) query.listedBy = listedBy
+        if (availableFrom) query.availableFrom = new Date(availableFrom);
+        if (title) query.title = title
+        if (isVerified) query.isVerified = isVerified === "true"
+        if (colorTheme) query.colorTheme = colorTheme
+        if (listingType) query.listingType = listingType;
+        if (city) query.city = city;
+        if (state) query.state = state
+        if (bedrooms) query.bedrooms = Number(bedrooms);
+        if (bathrooms) query.bathrooms = Number(bathrooms);
+        if (furnished) query.furnished = furnished === "true";
+        if (propertyType) query.type = propertyType;
+
+        if (price) {
+            query.price = { $gte: Number(price) }
+        }
+
+        if (areaSqFt) {
+            query.areaSqFt = { $gte: Number(areaSqFt) }
+        }
+
+        if (tags) {
+            const tagsArray = tags.split(",");
+            query.tags = { $in: tagsArray };
+        }
+
+        if (amenities) {
+            const amenitiesArray = amenities.split(",");
+            query.amenities = { $in: amenitiesArray };
+        }
+
+        const properties = await Properti.find(query);
+
+        res.status(200).json({
+            status: 200,
+            count: properties.length,
+            data: properties,
+        });
+        return
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ status: 500, message: "Internal Server Error" })
+        return;
+    }
+}
