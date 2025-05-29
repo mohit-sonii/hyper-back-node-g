@@ -4,7 +4,7 @@ import { authMiddleware } from "../middleware/auth.middleware";
 const router = Router()
 
 
-router.route("/").get(authMiddleware,findUser)
+router.route("/").post(authMiddleware,findUser)
 router.route("/:prop_id/:rec_user_id").post(authMiddleware,recommed)
 router.route("/recommendations").get(authMiddleware,getRecommendations)
 

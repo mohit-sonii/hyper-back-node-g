@@ -4,7 +4,7 @@ const express_1 = require("express");
 const recommand_Controller_1 = require("../controller/recommand.Controller");
 const auth_middleware_1 = require("../middleware/auth.middleware");
 const router = (0, express_1.Router)();
-router.route("/").get(auth_middleware_1.authMiddleware, recommand_Controller_1.findUser);
+router.route("/").post(auth_middleware_1.authMiddleware, recommand_Controller_1.findUser);
 router.route("/:prop_id/:rec_user_id").post(auth_middleware_1.authMiddleware, recommand_Controller_1.recommed);
 router.route("/recommendations").get(auth_middleware_1.authMiddleware, recommand_Controller_1.getRecommendations);
 exports.default = router;
