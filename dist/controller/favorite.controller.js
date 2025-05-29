@@ -27,7 +27,7 @@ const addFav = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         yield User_model_1.User.findByIdAndUpdate(user_id, {
             $push: {
-                properties: prop_id
+                favorites: prop_id
             }
         });
         res.status(200).json({ status: 200, message: "Added into Favorites" });

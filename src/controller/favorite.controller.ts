@@ -17,7 +17,7 @@ export const addFav = async (req: Request, res: Response): Promise<void> => {
         }
         await User.findByIdAndUpdate(user_id,{
             $push:{
-                properties:prop_id
+                favorites:prop_id
             }
         })
         res.status(200).json({status:200,message:"Added into Favorites"})
