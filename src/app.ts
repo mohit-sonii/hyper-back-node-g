@@ -23,6 +23,13 @@ app.use(cors({
     allowedHeaders: ['Content-Type'],
 }))
 
+app.get('/', (req, res) => {
+  res.send(`
+    <h2>👋 Thank you for being here!</h2>
+    <p>Please check the <a href="https://documenter.getpostman.com/view/34595465/2sB2qfBeu8" target="_blank">API Documentation</a> for available routes.</p>
+  `);
+});
+
 app.use("/auth", authRoutes)
 app.use("/properties", propertiRoutes)
 app.use("/:user_id/fav", favRoutes)
